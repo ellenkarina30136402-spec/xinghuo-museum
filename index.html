@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="两弹一星以来的中国科技史数字展馆，提供青年数字人讲解、资料问答和历史档案。">
 <title>星火长明 · 两弹一星数字展馆</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="data.js"></script><script defer src="app.js"></script>
+<link rel="stylesheet" href="style.css?v=2">
+<script defer src="data.js"></script><script defer src="archive.js?v=2"></script><script defer src="app.js?v=2"></script>
 </head>
 <body>
-<header class="top"><a class="brand" href="#home"><span>✦</span><div>星火长明<small>两弹一星数字展馆</small></div></a><nav aria-label="主导航"><a href="#home">数字讲解厅</a><a href="#timeline">历史档案</a><a href="#library">知识库</a></nav></header>
+<header class="top"><a class="brand" href="#home"><span>✦</span><div>星火长明<small>两弹一星数字展馆</small></div></a></header>
+<div class="shell"><aside class="sidebar"><nav aria-label="主导航"><a href="#home"><span aria-hidden="true">◉</span>数字讲解厅</a><a href="#timeline"><span aria-hidden="true">▤</span>历史档案</a><a href="#library"><span aria-hidden="true">⌕</span>知识库</a></nav></aside>
 <main>
 <section id="home" class="home">
 <div class="intro"><p class="eyebrow">中国科技史 · 数字展馆</p><h1>从两弹一星<br class="mobile"> 到星辰大海</h1></div>
@@ -19,9 +20,9 @@
 <aside class="panel right"><h2>问问星语</h2><form id="ask"><label for="question">从展馆资料中查找答案</label><div class="field"><input id="question" maxlength="120" required placeholder="例如：北斗三号有多少颗卫星？"><button class="primary">提问</button></div></form><div id="ideas" class="ideas"></div><div id="answer" aria-live="polite"></div><button id="read" hidden>朗读回答</button><details><summary>讲解设置</summary><label for="rate">语速</label><select id="rate"><option value=".82">慢速</option><option value=".96" selected>标准</option><option value="1.14">快速</option></select><label class="toggle"><input type="checkbox" id="auto"> 回答后自动朗读</label></details></aside>
 </div>
 </section>
-<section id="timeline" class="content" hidden><p class="eyebrow">历史档案</p><h1>沿着时间看科技跨越</h1><p class="muted">按时间排列的重大事件。点击展签插图打开对应的公开来源。</p><div id="timelineFilters" class="filters"></div><div id="events" class="cards"></div><div id="outlook" class="outlook"></div></section>
+<section id="timeline" class="content" hidden><p class="eyebrow">历史档案</p><h1>沿着时间看科技跨越</h1><p class="muted">按时间排列的重大事件。点击黑白配图可查阅事件详情。相关史料与展品照片在图下注明。</p><div id="timelineFilters" class="filters"></div><div id="events" class="cards"></div><div id="outlook" class="outlook"></div></section>
 <section id="library" class="content" hidden><p class="eyebrow">知识库</p><h1>查阅课堂资料与历史条目</h1><label for="filter">搜索问题、人物、项目或年份</label><input id="filter" type="search" placeholder="例如：东方红、南仁东、2020"><div id="libraryFilters" class="filters"></div><p id="count" class="muted" aria-live="polite"></p><div id="records"></div></section>
-</main>
+</main></div>
 <footer>星火长明 <span>课堂科技史专题 · 史料与讲稿按条目标注</span></footer>
 </body>
 </html>

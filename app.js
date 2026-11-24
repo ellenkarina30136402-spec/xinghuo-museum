@@ -166,6 +166,14 @@ function readAnswer() {
   if (answerText) narrate(answerText.match(/[^。！？\n]+[。！？]?/g) || [answerText]);
 }
 
+const photoSelection = {
+  '1964-10-16':'atom','1966-10-27':'after','1967-06-17':'after','1970-04-24':'satellite',
+  '1978-12-18':'reform','1992-09-21':'crew','1999-09-18':'award','1999-11-20':'crew',
+  '2003-10-15':'crew','2007-10-24':'moon1','2008-09-27':'crew','2012-06-18':'station',
+  '2013-12-14':'moon1','2016-09-25':'observatory','2019-01-03':'moon1','2020-06-23':'beidou',
+  '2020-12-17':'moon5','2021-05-15':'mars','2022-11-03':'station','2024-06-25':'moon6'
+};
+const contextual = new Set(['1966-10-27','1967-06-17','1992-09-21','1999-11-20','2008-09-27','2012-06-18','2013-12-14','2019-01-03']);
 function renderTimeline() {
   const list = museumData.events.filter(event => timelineFilter === 'all' || event.group === timelineFilter);
   find('events').replaceChildren(...list.map(event => {
@@ -173,14 +181,25 @@ function renderTimeline() {
     const cover = link('',event.url,'cover');
     cover.setAttribute('aria-label',event.title + '：在新窗口打开' + event.source);
     const image = element('img');
-    image.src = 'assets/' + event.art + '.webp';
-    image.loading = 'lazy';
-    image.alt = '主题展签插图';
-    cover.append(image);
+    const photo = archivePhotos[photoSelection[event.id]];
+    if (photo) {
+      image.src = photo[0];
+      image.loading = 'lazy';
+      image.alt = photo[2];
+      image.addEventListener('error', () => cover.replaceChildren(element('span','查看事件资料','no-photo')), {once:true});
+      cover.append(image);
+    } else {
+      cover.append(element('span','查看事件资料','no-photo'));
+    }
     const body = element('div','','card-body');
     const time = element('time',event.id);
     time.dateTime = event.id;
     body.append(time,element('h2',event.title),element('p',event.body),link(event.source + ' · 详情',event.url,'source'));
+    if (photo) {
+      const credit = element('p','','photo-credit');
+      credit.append(document.createTextNode((contextual.has(event.id) ? '相关资料 · ' : '') + photo[2] + ' · ' + photo[3] + ' · '),link(photo[4],photo[1]),document.createTextNode(' · 黑白处理'));
+      body.append(credit);
+    }
     card.append(cover,body);
     return card;
   }));
